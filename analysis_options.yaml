@@ -1,0 +1,56 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+  plugins:
+    - dart_code_metrics
+
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics/presets/all.yaml
+
+  anti-patterns:
+    - long-method:
+        exclude:
+          - test/**
+
+  metrics-exclude:
+    - test/**
+
+  metrics:
+    cyclomatic-complexity: 15
+    halstead-volume: 150
+    lines-of-code: 100
+    maximum-nesting-level: 5
+    number-of-methods: 10
+    number-of-parameters: 4
+    source-lines-of-code: 50
+    weight-of-class: 0.33
+  rules:
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 2
+    - avoid-passing-async-when-sync-expected:
+        exclude:
+          - test/**
+    - avoid-redundant-async:
+        exclude:
+          - test/**
+    - avoid-ignoring-return-values:
+        exclude:
+          - test/**
+    - no-equal-arguments:
+        exclude:
+          - test/**
+        ignored-parameters:
+          - height
+          - width
+    - avoid-top-level-members-in-tests:
+        exclude:
+          - test/**
+    - prefer-match-file-name:
+        exclude:
+          - test/**
