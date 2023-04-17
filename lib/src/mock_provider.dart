@@ -44,19 +44,22 @@ class MockAutoDisposeNotifier<T> extends AutoDisposeNotifier<T> with Mock {
 /// the [_build].
 ///
 /// _**Note**: It is critical to explicitly provide the state
-/// types when extending [MockAutoDisposeNotifier]_.
+/// types when extending [MockAutoDisposeNotifier].
 ///
 /// **GOOD**
 /// ```dart
-/// class MockNotifier extends MockAutoDisposeAsyncNotifier<NotifierState> implements
-/// Notifier {
-///  MockNotifier(super._initialState);
+/// class MockNotifier extends MockAutoDisposeAsyncNotifier<NotifierState>
+/// implements Notifier {
+///   MockNotifier(super._build);
 /// }
 /// ```
 ///
 /// **BAD**
 /// ```dart
-/// class MockNotifier extends MockAutoDisposeAsyncNotifier implements Notifier {}
+/// class MockNotifier extends MockAutoDisposeAsyncNotifier implements
+/// Notifier {
+///   MockNotifier(super._build)
+/// }
 /// ```
 /// {@endtemplate}
 class MockAutoDisposeAsyncNotifier<T> extends AutoDisposeAsyncNotifier<T>

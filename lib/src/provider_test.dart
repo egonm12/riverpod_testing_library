@@ -63,6 +63,8 @@ Future<void> providerTest<T>(
   });
 }
 
+/// Internal [testProvider] runner which is only visible for testing.
+/// This should never be used directly -- please use [testProvider] instead.
 @internal
 Future<void> testProvider<T>({
   required ProviderListenable<T> provider,
@@ -83,7 +85,7 @@ Future<void> testProvider<T>({
 
   await setUp?.call();
 
-  final container = makeProviderContainer(
+  final container = _makeProviderContainer(
     providerOverrides,
   );
 
@@ -117,7 +119,7 @@ Future<void> testProvider<T>({
           'concrete state instances.\n',
         );
       } else {
-        final diff = diffMatch(expected: expected, actual: states);
+        final diff = _diffMatch(expected: expected, actual: states);
         // ignore: avoid-throw-in-catch-block
         throw test.TestFailure('${error.message}\n$diff');
       }
@@ -130,7 +132,7 @@ Future<void> testProvider<T>({
   if (unhandledError != null) throw unhandledError;
 }
 
-ProviderContainer makeProviderContainer([
+ProviderContainer _makeProviderContainer([
   List<Override> overrides = const [],
 ]) {
   final container = ProviderContainer(overrides: overrides);
@@ -139,7 +141,7 @@ ProviderContainer makeProviderContainer([
   return container;
 }
 
-String diffMatch({required Object? expected, required Object? actual}) {
+String _diffMatch({required Object? expected, required Object? actual}) {
   final buffer = StringBuffer();
   final differences = diff(expected.toString(), actual.toString());
 

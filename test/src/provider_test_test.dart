@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_test/src/provider_test.dart';
 import 'package:test/test.dart';
@@ -13,10 +12,6 @@ import '../test_utils/notifier/error_counter.dart';
 import '../test_utils/provider/provider.dart';
 import '../test_utils/state_notifier/counter_state_notifier.dart';
 import '../test_utils/stream_provider/stream_provider.dart';
-
-class Listener<T> extends Mock {
-  void call(T? previous, T next);
-}
 
 void main() {
   group('providerTest', () {
@@ -175,8 +170,7 @@ void main() {
             '\n'
             '''\x1B[90m[\x1B[0m\x1B[31m[-2-]\x1B[0m\x1B[32m{+1+}\x1B[0m\x1B[90m]\x1B[0m\n'''
             '\n'
-            '==== end diff ====================================\n'
-            '';
+            '==== end diff ====================================\n';
 
         Object? actualError;
 

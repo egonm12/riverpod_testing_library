@@ -7,7 +7,6 @@ part 'provider.g.dart';
 @riverpod
 bool isCounterOdd(IsCounterOddRef ref) {
   final counter = ref.watch(counterProvider);
-  print('counter value: $counter');
 
   return counter.isOdd;
 }
