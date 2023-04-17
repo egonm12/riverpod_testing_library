@@ -54,3 +54,4 @@ dart_code_metrics:
     - prefer-match-file-name:
         exclude:
           - test/**
+    - prefer-static-class: false
