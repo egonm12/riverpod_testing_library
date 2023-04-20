@@ -12,6 +12,10 @@ analyzer:
   plugins:
     - dart_code_metrics
 
+linter:
+  rules:
+    directives_ordering: false
+
 dart_code_metrics:
   extends:
     - package:dart_code_metrics/presets/all.yaml
