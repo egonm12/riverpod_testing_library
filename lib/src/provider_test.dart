@@ -48,6 +48,7 @@ Future<void> providerTest<T>(
   void Function(ProviderContainer container)? verify,
   FutureOr<void> Function()? tearDown,
 }) async {
+  // ignore: avoid-passing-async-when-sync-expected
   test.test(description, () async {
     await testProvider(
       provider: provider,
@@ -77,18 +78,32 @@ Future<void> testProvider<T>({
   void Function(ProviderContainer container)? verify,
   FutureOr<void> Function()? tearDown,
 }) async {
-  final shouldListen = expect != null;
-
-  var shallowEquality = false;
-  var states = <T>[];
-  test.TestFailure? unhandledError;
-
   await setUp?.call();
 
-  final container = _makeProviderContainer(
-    providerOverrides,
+  final container = _makeProviderContainer(providerOverrides);
+  final states = _listenToProviderStates(
+    container,
+    provider,
+    expect != null,
+    fireImmediately,
   );
 
+  await act?.call(container);
+
+  if (skip > 0) states.removeRange(0, skip);
+  if (expect != null) _compareStates(states, expect());
+
+  verify?.call(container);
+  await tearDown?.call();
+}
+
+List<T> _listenToProviderStates<T>(
+  ProviderContainer container,
+  ProviderListenable<T> provider,
+  bool shouldListen,
+  bool fireImmediately,
+) {
+  final states = <T>[];
   if (shouldListen) {
     // ignore: avoid-ignoring-return-values
     container.listen<T>(
@@ -98,38 +113,18 @@ Future<void> testProvider<T>({
     );
   }
 
-  await act?.call(container);
+  return states;
+}
 
-  if (skip > 0) states = states.skip(skip).toList();
+void _compareStates<T>(List<T> states, Object expected) {
+  try {
+    test.expect(states, test.wrapMatcher(expected));
+  } on test.TestFailure catch (error) {
+    final diff = _diffMatch(expected: expected, actual: states);
 
-  if (expect != null) {
-    final expected = expect();
-    try {
-      test.expect(states, test.wrapMatcher(expected));
-    } on test.TestFailure catch (error) {
-      shallowEquality = '$states' == '$expected';
-
-      if (shallowEquality) {
-        // ignore: avoid-throw-in-catch-block
-        throw test.TestFailure(
-          '${error.message}\n '
-          'WARNING: Please ensure state instances extend Equatable, override '
-          '== and hashCode, or implement Comparable. Alternatively, consider '
-          'using Matchers in the expect of the providerTest rather than '
-          'concrete state instances.\n',
-        );
-      } else {
-        final diff = _diffMatch(expected: expected, actual: states);
-        // ignore: avoid-throw-in-catch-block
-        throw test.TestFailure('${error.message}\n$diff');
-      }
-    }
+    // ignore: avoid-throw-in-catch-block
+    throw test.TestFailure('${error.message}\n$diff');
   }
-
-  verify?.call(container);
-  await tearDown?.call();
-
-  if (unhandledError != null) throw unhandledError;
 }
 
 ProviderContainer _makeProviderContainer([

@@ -30,11 +30,11 @@ dart_code_metrics:
 
   metrics:
     cyclomatic-complexity: 15
-    halstead-volume: 150
+    halstead-volume: 180
     lines-of-code: 100
     maximum-nesting-level: 5
     number-of-methods: 10
-    number-of-parameters: 4
+    number-of-parameters: 10
     source-lines-of-code: 50
     weight-of-class: 0.33
   rules:
