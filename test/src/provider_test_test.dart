@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:riverpod/riverpod.dart';
-import 'package:riverpod_test/src/provider_test.dart';
 import 'package:test/test.dart';
 
+import 'package:riverpod_test/src/provider_test.dart';
 import '../test_utils/async_notifier/async_counter.dart';
 import '../test_utils/future_provider/future_provider.dart';
 import '../test_utils/mocks.dart';

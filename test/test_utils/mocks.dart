@@ -1,5 +1,4 @@
 import 'package:riverpod_test/src/mock_provider.dart';
-
 import 'async_notifier/async_counter.dart';
 import 'notifier/counter.dart';
 
