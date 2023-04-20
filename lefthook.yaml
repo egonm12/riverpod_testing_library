@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '*.dart'
+      exclude: '.g.dart|.freezed.dart|.tailor.dart'
+      run: dart format {staged_files} && git add {staged_files}
+    sort_imports:
+      glob: '*.dart'
+      run: flutter pub run import_sorter:main {staged_files} && git add {staged_files}
+    analyze:
+      glob: '*.dart'
+      exclude: '.g.dart'
+      run: dart analyze {staged_files} --fatal-infos
+    metrics:
+      glob: '*.dart'
+      exclude: '.g.dart|.freezed.dart|.tailor.dart'
+      run: flutter pub run dart_code_metrics:metrics analyze {staged_files} --fatal-performance --fatal-style --fatal-warnings
