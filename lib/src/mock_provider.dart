@@ -2,7 +2,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
 
 // ignore: format-comment
-/// {@template mock_auto_dispose_notifier}
+/// {@template mock_notifier}
 /// Extend or mixin this class to mark the implementation as a
 /// [MockAutoDisposeNotifier].
 ///
@@ -25,18 +25,19 @@ import 'package:riverpod/riverpod.dart';
 /// class MockNotifier extends MockAutoDisposeNotifier implements Notifier {}
 /// ```
 /// {@endtemplate}
-class MockAutoDisposeNotifier<T> extends AutoDisposeNotifier<T> with Mock {
-  /// {@macro mock_auto_dispose_notifier}
+class MockAutoDisposeNotifier<State> extends AutoDisposeNotifier<State>
+    with Mock {
+  /// {@macro mock_notifier}
   MockAutoDisposeNotifier(this._build) : super();
 
-  final T Function() _build;
+  final State Function() _build;
 
   @override
-  T build() => _build();
+  State build() => _build();
 }
 
 // ignore: format-comment
-/// {@template mock_auto_dispose_async_notifier}
+/// {@template mock_async_notifier}
 /// Extend or mixin this class to mark the implementation as a
 /// [MockAutoDisposeNotifier].
 ///
@@ -62,13 +63,13 @@ class MockAutoDisposeNotifier<T> extends AutoDisposeNotifier<T> with Mock {
 /// }
 /// ```
 /// {@endtemplate}
-class MockAutoDisposeAsyncNotifier<T> extends AutoDisposeAsyncNotifier<T>
-    with Mock {
-  /// {@macro mock_auto_dispose_notifier}
+class MockAutoDisposeAsyncNotifier<State>
+    extends AutoDisposeAsyncNotifier<State> with Mock {
+  /// {@macro mock_async_notifier}
   MockAutoDisposeAsyncNotifier(this._build) : super();
 
-  final T Function() _build;
+  final State Function() _build;
 
   @override
-  T build() => _build();
+  State build() => _build();
 }
