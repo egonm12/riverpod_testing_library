@@ -5,9 +5,16 @@ analyzer:
     strict-casts: true
     strict-inference: true
     strict-raw-types: true
+ 
+  exclude:
+    - /**/*.g.dart
 
   plugins:
     - dart_code_metrics
+
+linter:
+  rules:
+    directives_ordering: false
 
 dart_code_metrics:
   extends:
@@ -23,11 +30,11 @@ dart_code_metrics:
 
   metrics:
     cyclomatic-complexity: 15
-    halstead-volume: 150
+    halstead-volume: 180
     lines-of-code: 100
     maximum-nesting-level: 5
     number-of-methods: 10
-    number-of-parameters: 4
+    number-of-parameters: 10
     source-lines-of-code: 50
     weight-of-class: 0.33
   rules:
@@ -52,5 +59,17 @@ dart_code_metrics:
         exclude:
           - test/**
     - prefer-match-file-name:
+        exclude:
+          - test/**
+    - prefer-static-class: false
+    - prefer-commenting-analyzer-ignores: false
+    - no-magic-number: false
+    - member-ordering:
+        order:
+          - constructors
+          - public-fields
+          - private-fields
+    - prefer-match-file-name: false
+    - avoid-late-keyword:
         exclude:
           - test/**
