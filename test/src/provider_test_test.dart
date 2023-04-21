@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
@@ -13,8 +14,43 @@ import '../test_utils/provider/provider.dart';
 import '../test_utils/state_notifier/counter_state_notifier.dart';
 import '../test_utils/stream_provider/stream_provider.dart';
 
+class Listener extends Mock {
+  void call();
+}
+
 void main() {
   group('providerTest', () {
+    late Listener listener;
+
+    setUp(() {
+      listener = Listener();
+    });
+
+    setUpAll(() {
+      registerFallbackValue(ProviderContainer());
+    });
+
+    test('calls set up', () async {
+      await testProvider(provider: counterProvider, setUp: listener.call);
+
+      verify(listener.call).called(1);
+    });
+
+    test('calls tear down', () async {
+      await testProvider(provider: counterProvider, tearDown: listener.call);
+
+      verify(listener.call).called(1);
+    });
+
+    test('calls verify', () async {
+      await testProvider(
+        provider: counterProvider,
+        verify: (_) => listener.call(),
+      );
+
+      verify(listener.call).called(1);
+    });
+
     group('Provider', () {
       providerTest<bool>(
         'emits false when the counter provider returns an even value '

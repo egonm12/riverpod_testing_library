@@ -70,3 +70,6 @@ dart_code_metrics:
           - public-fields
           - private-fields
     - prefer-match-file-name: false
+    - avoid-late-keyword:
+        exclude:
+          - test/**
