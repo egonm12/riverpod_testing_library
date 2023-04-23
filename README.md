@@ -13,7 +13,7 @@ Add `riverpod_testing_library` to your `pubspec.yaml`:
 
 ```yaml
 dev_dependencies:
-  riverpod_testing_library: 0.1.0
+  riverpod_testing_library: 0.1.1
 ```
 
 Install it:
