@@ -32,7 +32,7 @@ dart pub get
 |Argument |Type    |Default|Description|
 |-----|--------|-------|-----------|
 |`provider`|[`ProviderListenable<State>`](https://pub.dev/documentation/riverpod/latest/riverpod/ProviderListenable-mixin.html)|  |The provider under test.
-|`overrides`  |[`List<Override>`]((<https://pub.dev/documentation/riverpod/latest/riverpod/Override-class.html>))|`<Override>[]`|A list of `Overrides` that stores the state of the providers and allows overriding the behavior of a specific provider|
+|`overrides`  |[`List<Override>`](https://pub.dev/documentation/riverpod/latest/riverpod/Override-class.html)|`<Override>[]`|A list of `Overrides` that stores the state of the providers and allows overriding the behavior of a specific provider|
 |`setUp`  |`FutureOr<void> Function()?`| |Used to set up any dependencies prior to initializing the [provider] under test.|
 |`skip`  |`int`|`0`|Can be used to skip any number of states.|
 |`fireImmediately`  |`bool`|`false`|Tell Riverpod to immediately call the listener with the current value. Has no effect when `expect` is null.|
