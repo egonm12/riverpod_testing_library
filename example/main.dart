@@ -1,4 +1,4 @@
-import 'package:riverpod_test/riverpod_test.dart';
+import 'package:riverpod_testing_library/riverpod_testing_library.dart';
 import 'package:test/test.dart';
 
 import '../test/test_utils/notifier/counter.dart';
