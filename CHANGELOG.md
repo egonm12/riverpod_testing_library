@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 - 2023-04-23
+
+doc: fix code coverage badge link
+
 ## 0.1.3 - 2023-04-23
 
 doc: update readme
