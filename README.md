@@ -5,6 +5,8 @@
 
 A testing library which makes it easy to test providers. Built to be used with the [riverpod](https://pub.dev/packages/riverpod) state management package. Inspired by [bloc_test](https://pub.dev/packages/bloc_test).
 
+---
+
 ## Getting started
 
 Add `riverpod_testing_library` to your `pubspec.yaml`:
@@ -19,6 +21,26 @@ Install it:
 ```sh
 dart pub get
 ```
+
+---
+
+## API
+
+### `providerTest`
+
+|Argument |Type    |Default|Description|
+|-----|--------|-------|-----------|
+|`provider`|[`ProviderListenable<State>`](https://pub.dev/documentation/riverpod/latest/riverpod/ProviderListenable-mixin.html)|  |The provider under test.
+|`overrides`  |[`List<Override>`]((<https://pub.dev/documentation/riverpod/latest/riverpod/Override-class.html>))|`<Override>[]`|A list of `Overrides` that stores the state of the providers and allows overriding the behavior of a specific provider|
+|`setUp`  |`FutureOr<void> Function()?`| |Used to set up any dependencies prior to initializing the [provider] under test.|
+|`skip`  |`int`|`0`|Can be used to skip any number of states.|
+|`fireImmediately`  |`bool`|`false`|Tell Riverpod to immediately call the listener with the current value. Has no effect when `expect` is null.|
+|`act`  |`FutureOr<void> Function(ProviderContainer container)?`||Will be invoked with the [ProviderContainer](https://pub.dev/documentation/riverpod/latest/riverpod/ProviderContainer-class.html) and should be used to interact with any provider.|
+|`expect`  |`Object Function()?`||Asserts that the `provider` updates with the expected states (in  order) after [act] is executed.|
+|`verify`  |`FutureOr<void> Function(ProviderContainer container)?`||Invoked after [act] and can be used for additional verification/assertions.|
+|`tearDown`  |`FutureOr<void> Function()?`||Used to execute any code after the test has run.|
+
+---
 
 ## Usage examples
 
