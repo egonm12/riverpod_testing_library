@@ -1,4 +1,4 @@
-# Riverpod Test
+# Riverpod Testing Library
 
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
@@ -7,11 +7,11 @@ A testing library which makes it easy to test providers. Built to be used with t
 
 ## Getting started
 
-Add `riverpod_test` to your `pubspec.yaml`:
+Add `riverpod_testing_library` to your `pubspec.yaml`:
 
 ```yaml
 dev_dependencies:
-  riverpod_test: 0.1.0
+  riverpod_testing_library: 0.1.0
 ```
 
 Install it:
