@@ -94,4 +94,4 @@ providerTest<int>(
 [license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[test_coverage_badge]: ./coverage_badge.svg
+[test_coverage_badge]: https://github.com/egonm12/riverpod_testing_library/blob/main/coverage_badge.svg
