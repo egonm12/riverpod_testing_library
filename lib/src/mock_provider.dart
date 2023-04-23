@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -25,6 +26,7 @@ import 'package:riverpod/riverpod.dart';
 /// class MockNotifier extends MockAutoDisposeNotifier implements Notifier {}
 /// ```
 /// {@endtemplate}
+@internal
 class MockAutoDisposeNotifier<State> extends AutoDisposeNotifier<State>
     with Mock {
   /// {@macro mock_notifier}
@@ -63,6 +65,7 @@ class MockAutoDisposeNotifier<State> extends AutoDisposeNotifier<State>
 /// }
 /// ```
 /// {@endtemplate}
+@internal
 class MockAutoDisposeAsyncNotifier<State>
     extends AutoDisposeAsyncNotifier<State> with Mock {
   /// {@macro mock_async_notifier}
