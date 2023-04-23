@@ -6,30 +6,35 @@ import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart' as test;
 
 /// Creates a new `riverpod`-specific test case with the given [description].
-/// [providerTest] will handle asserting that the `provider` emits the
+/// [providerTest] will handle asserting that the `provider` updates with the
 /// expected states (in order) after [act] is executed.
+///
+/// [provider] should be the `provider` under test.
+///
+/// [overrides] is a list of [Override]s that stores the state of the providers
+/// and allows overriding the behavior of a specific provider.
 ///
 /// [setUp] is optional and should be used to set up
 /// any dependencies prior to initializing the [provider] under test.
 /// [setUp] should be used to set up state necessary for a particular test case.
 /// For common set up code, prefer to use `setUp` from `package:test/test.dart`.
 ///
-/// [overrides] is an object that stores the state of the providers and
-/// allows overriding the behavior of a specific [provider].
-///
-/// [provider] should be the `provider` under test.
+/// [skip] is an optional `int` which can be used to skip any number of states.
+/// [skip] defaults to 0.
 ///
 /// [fireImmediately] (false by default) can be optionally passed to tell
-/// Riverpod to immediately call the listener with the current value.
+/// Riverpod to immediately call the listener with the current value. Has no
+/// effect when [expect] is `null`.
 ///
-/// [act] is an optional callback which will be invoked with the [provider]
-/// under test and should be used to interact with the [provider].
+/// [act] is an optional callback which will be invoked with the
+/// [ProviderContainer] and should be used to interact with any provider.
+///
+/// [expect] is an optional `Function` that returns a `Matcher` that asserts
+/// that the `provider` updates with the expected states (in order) after [act]
+/// is executed.
 ///
 /// [verify] is an optional callback which is invoked after [act]
 /// and can be used for additional verification/assertions.
-///
-/// [expect] is an optional `Function` that returns a `Matcher` which the
-/// [provider] under test is expected to emit after [act] is executed.
 ///
 /// [tearDown] is optional and can be used to execute any code after the test
 /// has run.
@@ -39,13 +44,13 @@ import 'package:test/test.dart' as test;
 Future<void> providerTest<T>(
   String description, {
   required ProviderListenable<T> provider,
-  List<Override> overrides = const [],
+  List<Override> overrides = const <Override>[],
   FutureOr<void> Function()? setUp,
   int skip = 0,
   bool fireImmediately = false,
   FutureOr<void> Function(ProviderContainer container)? act,
   Object Function()? expect,
-  void Function(ProviderContainer container)? verify,
+  FutureOr<void> Function(ProviderContainer container)? verify,
   FutureOr<void> Function()? tearDown,
 }) async {
   // ignore: avoid-passing-async-when-sync-expected
@@ -75,7 +80,7 @@ Future<void> testProvider<T>({
   bool fireImmediately = false,
   FutureOr<void> Function(ProviderContainer container)? act,
   Object Function()? expect,
-  void Function(ProviderContainer container)? verify,
+  FutureOr<void> Function(ProviderContainer container)? verify,
   FutureOr<void> Function()? tearDown,
 }) async {
   await setUp?.call();
@@ -93,7 +98,7 @@ Future<void> testProvider<T>({
   if (skip > 0) states.removeRange(0, skip);
   if (expect != null) _compareStates(states, expect());
 
-  verify?.call(container);
+  await verify?.call(container);
   await tearDown?.call();
 }
 
