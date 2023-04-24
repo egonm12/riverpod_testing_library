@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6 - 2023-04-24
+
+* refactor: change providerTest return type to void
+
 ## 0.1.5 - 2023-04-24
 
 * fix: update and move dependencies
