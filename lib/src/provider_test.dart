@@ -41,7 +41,7 @@ import 'package:test/test.dart' as test;
 /// [tearDown] should be used to clean up after a particular test case.
 /// For common tear down code, prefer to use `tearDown` from `package:test/test.dart`.
 @isTest
-Future<void> providerTest<T>(
+void providerTest<T>(
   String description, {
   required ProviderListenable<T> provider,
   List<Override> overrides = const <Override>[],
@@ -52,7 +52,7 @@ Future<void> providerTest<T>(
   Object Function()? expect,
   FutureOr<void> Function(ProviderContainer container)? verify,
   FutureOr<void> Function()? tearDown,
-}) async {
+}) {
   // ignore: avoid-passing-async-when-sync-expected
   test.test(description, () async {
     await testProvider(
