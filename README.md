@@ -14,7 +14,7 @@ Add `riverpod_testing_library` to your `pubspec.yaml`:
 
 ```yaml
 dev_dependencies:
-  riverpod_testing_library: 0.1.6
+  riverpod_testing_library: 0.2.0
 ```
 
 Install it:
@@ -25,9 +25,19 @@ dart pub get
 
 ---
 
-## API
+## Supported providers
 
-### `providerTest`
+|Type |Type    |
+|-----|--------|
+|Provider|✅|
+|(Async)NotifierProvider|✅|
+|StateNotifierProvider|✅|
+|FutureProvider|✅|
+|StreamProvider|✅|
+|StateProvider|✅|
+|ChangeNotifierProvider|✅|
+
+## API
 
 |Argument |Type    |Default|Description|
 |-----|--------|-------|-----------|
