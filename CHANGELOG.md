@@ -2,8 +2,9 @@
 
 ## 0.2.0
 
-* build: lower riverpod version to 2.0.0
+* build: lower riverpod version to ^2.0.0
 * docs: update readme
+* build: update mocktail to ^1.0.0
 
 ## 0.1.6
 
