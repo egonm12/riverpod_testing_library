@@ -12,7 +12,7 @@ dev_dependencies:
   import_sorter: ^4.6.0
   riverpod_annotation: ^2.0.0
   riverpod_generator: ^2.0.0
-  very_good_analysis: ^4.0.0+1
+  very_good_analysis: ">=4.0.0+1 <6.0.0"
 
 dependencies:
   diff_match_patch: ^0.4.1
